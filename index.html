@@ -1,0 +1,56 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Prism Tally Health Check</title>
+</head>
+<body>
+  <h1>Health Check Quiz</h1>
+  <p>If you can see this, Netlify deploy is working.</p>
+
+  <form id="leadForm">
+    <input name="firstName" placeholder="First name" required />
+    <input name="lastName" placeholder="Last name" />
+    <input name="email" type="email" placeholder="Email" required />
+    <input name="phone" placeholder="Phone" />
+    <input name="company" placeholder="Company" />
+    <button type="submit">Submit</button>
+  </form>
+
+  <pre id="out"></pre>
+
+  <script>
+    const out = document.getElementById("out");
+    document.getElementById("leadForm").addEventListener("submit", async (e) => {
+      e.preventDefault();
+      out.textContent = "Submitting...";
+
+      const fd = new FormData(e.target);
+      const data = Object.fromEntries(fd.entries());
+
+      // Basic tags for testing
+      data.tags = ["tally-health-check", "prism-lead", "source-netlify"];
+
+      // Capture UTMs (optional)
+      const qs = new URLSearchParams(location.search);
+      data.utm = {
+        utm_source: qs.get("utm_source"),
+        utm_medium: qs.get("utm_medium"),
+        utm_campaign: qs.get("utm_campaign"),
+        gclid: qs.get("gclid"),
+        fbclid: qs.get("fbclid")
+      };
+
+      const res = await fetch("/.netlify/functions/ghl-intake", {
+        method: "POST",
+        headers: {"Content-Type":"application/json"},
+        body: JSON.stringify(data)
+      });
+
+      const txt = await res.text();
+      out.textContent = `Status: ${res.status}\n\n${txt}`;
+    });
+  </script>
+</body>
+</html>
