@@ -35,11 +35,12 @@ export default async (req) => {
       }), { status: 500, headers: { "Content-Type": "application/json" }});
     }
 
-    const headers = {
-      "Authorization": `Bearer ${token}`,
-      "Version": "2021-07-28",
-      "Content-Type": "application/json"
-    };
+   const headers = {
+  Authorization: `Bearer ${token}`,
+  Version: "2021-07-28",
+  "Location-Id": process.env.uhwOMWuFodfwHvR7KXoa,
+  "Content-Type": "application/json"
+};
 
     // 1) Upsert contact
     const upsertPayload = {
