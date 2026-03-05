@@ -1,56 +1,416 @@
-<!doctype html>
+<!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="utf-8" />
-  <meta name="viewport" content="width=device-width,initial-scale=1" />
-  <title>Prism Tally Health Check</title>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+<title>Tally Trading Health Check | Prism</title>
+<meta name="description" content="Free 5-minute assessment for UAE trading companies using Tally ERP. Score your operations across 5 critical areas.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:ital,wght@0,300;0,400;0,500;0,600;0,700;0,800;1,400;1,500&family=Instrument+Serif:ital@0;1&display=swap" rel="stylesheet">
+<style>
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+:root{--ink:#0C1220;--ink-800:#1A2332;--ink-700:#242F3F;--ink-600:#3A4556;--ink-500:#556270;--ink-400:#7B8794;--ink-300:#A0AAB4;--ink-200:#D1D5DB;--ink-100:#E8EAED;--ink-50:#F4F5F6;--surface:#FAFBFC;--white:#FFFFFF;--teal-900:#134E4A;--teal-800:#115E59;--teal-700:#0F766E;--teal-600:#0D9488;--teal-500:#14B8A6;--teal-400:#2DD4BF;--teal-300:#5EEAD4;--teal-100:#CCFBF1;--teal-50:#F0FDFA;--amber-600:#D97706;--amber-500:#F59E0B;--red-500:#EF4444;--green-500:#22C55E;--radius:16px;--radius-sm:10px;--radius-xs:6px}
+html{scroll-behavior:smooth}
+body{font-family:'Plus Jakarta Sans',-apple-system,BlinkMacSystemFont,sans-serif;color:var(--ink);background:var(--white);line-height:1.6;-webkit-font-smoothing:antialiased;overflow-x:hidden}
+.nav{position:fixed;top:0;left:0;right:0;z-index:100;padding:16px 32px;display:flex;justify-content:space-between;align-items:center;transition:all .3s}
+.nav.scrolled{background:rgba(12,18,32,.92);backdrop-filter:blur(20px);-webkit-backdrop-filter:blur(20px);border-bottom:1px solid rgba(255,255,255,.06);padding:12px 32px}
+.nav-logo{font-size:20px;font-weight:800;color:var(--white);letter-spacing:-.5px;display:flex;align-items:center;gap:3px}
+.nav-logo .mark{color:var(--teal-400);font-family:'Instrument Serif',serif;font-style:italic;font-weight:400;font-size:22px}
+.nav-cta{padding:10px 24px;background:rgba(255,255,255,.08);border:1px solid rgba(255,255,255,.12);color:var(--white);border-radius:100px;font-size:14px;font-weight:600;cursor:pointer;transition:all .25s;text-decoration:none;font-family:inherit}
+.nav-cta:hover{background:var(--teal-600);border-color:var(--teal-600);transform:translateY(-1px)}
+.hero{min-height:100vh;display:flex;flex-direction:column;justify-content:center;align-items:center;background:var(--ink);position:relative;overflow:hidden;padding:100px 24px 80px}
+.hero::before{content:'';position:absolute;top:-40%;right:-20%;width:70%;height:140%;background:radial-gradient(ellipse,rgba(20,184,166,.06) 0%,transparent 65%);pointer-events:none}
+.hero::after{content:'';position:absolute;bottom:-40%;left:-20%;width:60%;height:120%;background:radial-gradient(ellipse,rgba(37,99,235,.04) 0%,transparent 65%);pointer-events:none}
+.hero-atmos{position:absolute;inset:0;background:radial-gradient(ellipse at 30% 20%,rgba(20,184,166,.04) 0%,transparent 50%),radial-gradient(ellipse at 70% 80%,rgba(20,184,166,.03) 0%,transparent 50%);pointer-events:none}
+.hero-content{max-width:720px;text-align:center;position:relative;z-index:2}
+.hero-kicker{font-size:13px;font-weight:600;color:var(--ink-400);text-transform:uppercase;letter-spacing:3px;margin-bottom:28px;animation:slideUp .7s ease both;position:relative;display:inline-block}
+.hero-kicker::before,.hero-kicker::after{content:'';position:absolute;top:50%;width:32px;height:1px;background:var(--ink-600)}
+.hero-kicker::before{right:calc(100% + 16px)}
+.hero-kicker::after{left:calc(100% + 16px)}
+.hero h1{font-family:'Instrument Serif',serif;font-size:clamp(38px,5.5vw,62px);font-weight:400;color:var(--white);line-height:1.12;margin-bottom:28px;letter-spacing:-1.5px;animation:slideUp .7s ease .1s both}
+.hero h1 em{font-style:italic;color:var(--teal-400)}
+.hero-sub{font-size:clamp(16px,2vw,19px);color:var(--ink-300);line-height:1.7;margin-bottom:16px;max-width:540px;margin-left:auto;margin-right:auto;animation:slideUp .7s ease .2s both}
+.hero-btn{display:inline-flex;align-items:center;gap:12px;padding:18px 44px;background:var(--teal-700);color:var(--white);border:none;border-radius:14px;font-size:17px;font-weight:700;font-family:inherit;cursor:pointer;transition:all .3s;box-shadow:0 4px 24px rgba(13,148,136,.25),inset 0 1px 0 rgba(255,255,255,.1);animation:slideUp .7s ease .3s both}
+.hero-btn:hover{background:var(--teal-600);transform:translateY(-2px);box-shadow:0 8px 32px rgba(13,148,136,.35)}
+.hero-btn svg{transition:transform .3s}.hero-btn:hover svg{transform:translateX(4px)}
+.hero-meta{margin-top:48px;display:flex;justify-content:center;align-items:center;gap:8px;animation:slideUp .7s ease .4s both;font-size:14px;color:var(--ink-400);font-weight:500}
+.hero-meta .sep{width:4px;height:4px;background:var(--ink-600);border-radius:50%}
+@keyframes slideUp{from{opacity:0;transform:translateY(24px)}to{opacity:1;transform:translateY(0)}}
+.pain{padding:80px 24px;background:var(--surface);border-top:1px solid var(--ink-100)}
+.pain-inner{max-width:960px;margin:0 auto}
+.pain h2{font-family:'Instrument Serif',serif;font-size:clamp(26px,3.5vw,36px);font-weight:400;text-align:center;margin-bottom:12px;letter-spacing:-.5px}
+.pain-sub{text-align:center;color:var(--ink-500);font-size:16px;margin-bottom:52px;max-width:560px;margin-left:auto;margin-right:auto}
+.pain-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:16px}
+.pain-card{background:var(--white);border-radius:var(--radius);padding:28px 24px;border:1px solid var(--ink-100);transition:all .3s}
+.pain-card:hover{border-color:var(--teal-500);box-shadow:0 4px 20px rgba(13,148,136,.08);transform:translateY(-3px)}
+.pain-num{font-family:'Instrument Serif',serif;font-size:36px;color:var(--ink-100);line-height:1;margin-bottom:12px}
+.pain-card h3{font-size:15px;font-weight:700;margin-bottom:8px}
+.pain-card p{font-size:14px;color:var(--ink-500);line-height:1.6}
+.cta-strip{background:var(--ink);padding:56px 24px;text-align:center;position:relative;overflow:hidden}
+.cta-strip::before{content:'';position:absolute;inset:0;background:radial-gradient(ellipse at center,rgba(20,184,166,.04) 0%,transparent 60%);pointer-events:none}
+.cta-strip h2{font-family:'Instrument Serif',serif;font-size:clamp(24px,3.5vw,34px);color:var(--white);margin-bottom:12px;position:relative;font-weight:400}
+.cta-strip p{color:var(--ink-300);font-size:16px;margin-bottom:28px;position:relative}
+.cta-strip .hero-btn{position:relative}
+.quiz{display:none;min-height:100vh;background:var(--surface)}.quiz.active{display:block}
+.quiz-header{background:var(--ink);padding:16px 32px;display:flex;justify-content:space-between;align-items:center;position:sticky;top:0;z-index:90}
+.quiz-logo{font-size:16px;font-weight:800;color:var(--white);display:flex;align-items:center;gap:3px}
+.quiz-logo .mark{color:var(--teal-400);font-family:'Instrument Serif',serif;font-style:italic;font-weight:400;font-size:18px}
+.quiz-progress{flex:1;max-width:280px;margin:0 24px;height:4px;background:var(--ink-700);border-radius:100px;overflow:hidden}
+.quiz-progress-fill{height:100%;background:linear-gradient(90deg,var(--teal-600),var(--teal-400));border-radius:100px;transition:width .4s ease}
+.quiz-count{font-size:13px;font-weight:600;color:var(--ink-400);min-width:48px;text-align:right}
+.quiz-body{max-width:640px;margin:0 auto;padding:48px 24px 120px}
+.quiz-category{display:inline-flex;padding:6px 14px;background:var(--teal-50);color:var(--teal-800);border-radius:100px;font-size:12px;font-weight:700;text-transform:uppercase;letter-spacing:1px;margin-bottom:20px}
+.quiz-question{font-family:'Instrument Serif',serif;font-size:clamp(24px,3.5vw,32px);font-weight:400;line-height:1.3;margin-bottom:12px;letter-spacing:-.3px}
+.quiz-context{font-size:14px;color:var(--ink-400);margin-bottom:32px;line-height:1.6;font-style:italic}
+.quiz-options{display:flex;flex-direction:column;gap:10px}
+.quiz-option{background:var(--white);border:2px solid var(--ink-100);border-radius:var(--radius-sm);padding:18px 20px;font-size:15px;font-weight:500;color:var(--ink);cursor:pointer;transition:all .2s;text-align:left;font-family:inherit;line-height:1.5;display:flex;align-items:flex-start;gap:14px;-webkit-tap-highlight-color:transparent}
+.quiz-option:hover{border-color:var(--teal-500);background:var(--teal-50)}
+.quiz-option.selected{border-color:var(--teal-600);background:var(--teal-50);color:var(--teal-900)}
+.quiz-option .ind{width:22px;height:22px;min-width:22px;border:2px solid var(--ink-200);border-radius:50%;display:flex;align-items:center;justify-content:center;transition:all .2s;margin-top:1px}
+.quiz-option.selected .ind{border-color:var(--teal-600);background:var(--teal-600)}
+.quiz-option.selected .ind::after{content:'';width:8px;height:8px;background:var(--white);border-radius:50%}
+.quiz-nav{position:fixed;bottom:0;left:0;right:0;background:var(--white);border-top:1px solid var(--ink-100);padding:16px 24px;display:flex;justify-content:space-between;align-items:center;z-index:80}
+.quiz-back{padding:12px 24px;background:none;border:1px solid var(--ink-200);border-radius:var(--radius-sm);font-size:14px;font-weight:600;color:var(--ink-500);cursor:pointer;font-family:inherit;transition:all .2s}
+.quiz-back:hover{border-color:var(--ink-400);color:var(--ink)}.quiz-back:disabled{opacity:.3;cursor:not-allowed}
+.quiz-next{padding:12px 32px;background:var(--teal-700);border:none;border-radius:var(--radius-sm);font-size:14px;font-weight:700;color:var(--white);cursor:pointer;font-family:inherit;transition:all .2s;display:flex;align-items:center;gap:8px}
+.quiz-next:hover{background:var(--teal-600)}.quiz-next:disabled{opacity:.35;cursor:not-allowed}
+.lead{display:none;min-height:100vh;background:var(--ink);position:relative;overflow:hidden}.lead.active{display:flex;align-items:center;justify-content:center}
+.lead-card{max-width:520px;width:100%;margin:0 auto;padding:48px 40px;background:var(--white);border-radius:24px;position:relative;z-index:2;box-shadow:0 24px 64px rgba(0,0,0,.3)}
+.lead-card h2{font-family:'Instrument Serif',serif;font-size:28px;font-weight:400;margin-bottom:8px;letter-spacing:-.3px}
+.lead-sub{font-size:15px;color:var(--ink-500);margin-bottom:28px;line-height:1.6}
+.lead-preview{display:flex;align-items:center;gap:16px;padding:16px 20px;background:var(--teal-50);border:1px solid var(--teal-100);border-radius:var(--radius-sm);margin-bottom:28px}
+.lead-score-preview{width:52px;height:52px;min-width:52px;background:var(--teal-700);border-radius:50%;display:flex;align-items:center;justify-content:center;font-family:'Instrument Serif',serif;font-size:20px;color:var(--white)}
+.lead-preview-text{font-size:14px;color:var(--teal-900);line-height:1.5}.lead-preview-text strong{display:block;margin-bottom:2px}
+.form-row{display:grid;grid-template-columns:1fr 1fr;gap:12px}
+.form-field{margin-bottom:14px}
+.form-field label{display:block;font-size:13px;font-weight:600;color:var(--ink-600);margin-bottom:6px}
+.form-field input,.form-field select{width:100%;padding:12px 14px;border:1.5px solid var(--ink-200);border-radius:var(--radius-xs);font-size:15px;font-family:inherit;color:var(--ink);background:var(--white);transition:border-color .2s;-webkit-appearance:none}
+.form-field input:focus,.form-field select:focus{outline:none;border-color:var(--teal-500);box-shadow:0 0 0 3px rgba(20,184,166,.1)}
+.form-field input::placeholder{color:var(--ink-300)}
+.form-submit{width:100%;padding:16px;background:var(--teal-700);color:var(--white);border:none;border-radius:var(--radius-sm);font-size:16px;font-weight:700;font-family:inherit;cursor:pointer;transition:all .25s;margin-top:8px}
+.form-submit:hover{background:var(--teal-600);transform:translateY(-1px)}.form-submit:disabled{opacity:.5;cursor:not-allowed;transform:none}
+.form-privacy{font-size:12px;color:var(--ink-400);text-align:center;margin-top:14px}
+.results{display:none;background:var(--surface);min-height:100vh}.results.active{display:block}
+.results-hero{background:var(--ink);padding:80px 24px 60px;text-align:center;position:relative;overflow:hidden}
+.results-hero::before{content:'';position:absolute;inset:0;background:radial-gradient(ellipse at center,rgba(20,184,166,.06) 0%,transparent 60%);pointer-events:none}
+.results-score-wrap{position:relative;z-index:2;margin-bottom:28px}
+.results-gauge{position:relative;width:180px;height:180px;margin:0 auto}
+.results-gauge svg{width:180px;height:180px;transform:rotate(-90deg)}
+.results-gauge .trk{fill:none;stroke:var(--ink-700);stroke-width:8}
+.results-gauge .fil{fill:none;stroke-width:8;stroke-linecap:round;transition:stroke-dashoffset 1.5s ease}
+.rsn{position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);text-align:center}
+.rsn .big{font-family:'Instrument Serif',serif;font-size:48px;color:var(--white);line-height:1}
+.rsn .of{font-size:14px;color:var(--ink-400);font-weight:500;margin-top:2px}
+.results-badge{display:inline-block;font-size:13px;font-weight:700;text-transform:uppercase;letter-spacing:2px;padding-bottom:6px;border-bottom:2px solid currentColor;margin-bottom:20px;position:relative;z-index:2}
+.results-title{font-family:'Instrument Serif',serif;font-size:clamp(22px,3vw,30px);color:var(--white);font-weight:400;margin-bottom:12px;position:relative;z-index:2}
+.results-desc{font-size:15px;color:var(--ink-300);max-width:560px;margin:0 auto;line-height:1.7;position:relative;z-index:2}
+.results-benchmark{max-width:480px;margin:32px auto 0;position:relative;z-index:2}
+.bbar{height:8px;background:var(--ink-700);border-radius:100px;position:relative;margin-bottom:12px}
+.bavg{position:absolute;top:-6px;width:3px;height:20px;background:var(--ink-400);border-radius:2px}
+.byou{position:absolute;top:-8px;width:24px;height:24px;background:var(--teal-400);border-radius:50%;border:3px solid var(--ink);transform:translateX(-50%);transition:left 1.5s ease}
+.blabels{display:flex;justify-content:space-between;font-size:11px;color:var(--ink-400);font-weight:600;text-transform:uppercase;letter-spacing:.5px}
+.results-body{max-width:700px;margin:0 auto;padding:48px 24px 40px}
+.results-section-title{font-family:'Instrument Serif',serif;font-size:24px;font-weight:400;margin-bottom:24px;text-align:center}
+.cc{background:var(--white);border:1px solid var(--ink-100);border-radius:var(--radius);padding:24px;margin-bottom:14px;transition:all .2s}
+.cc:hover{box-shadow:0 2px 12px rgba(0,0,0,.04)}
+.cc-h{display:flex;justify-content:space-between;align-items:center;margin-bottom:12px}
+.cc-n{font-size:15px;font-weight:700}
+.cc-s{font-size:14px;font-weight:800;font-family:'Instrument Serif',serif}
+.cc-bw{height:6px;background:var(--ink-50);border-radius:100px;overflow:visible;margin-bottom:14px;position:relative}
+.cc-bf{height:100%;border-radius:100px;transition:width 1s ease .3s}
+.cc-ba{position:absolute;top:-3px;width:2px;height:12px;background:var(--ink-300);border-radius:1px}
+.cc-i{font-size:14px;color:var(--ink-500);line-height:1.6}
+.cc-bm{font-size:12px;color:var(--ink-400);margin-top:8px;font-weight:500}
+.results-cta{max-width:700px;margin:0 auto;padding:0 24px 64px}
+.rcta{background:var(--ink);border-radius:20px;padding:44px 40px;text-align:center;position:relative;overflow:hidden}
+.rcta::before{content:'';position:absolute;inset:0;background:radial-gradient(ellipse at top right,rgba(20,184,166,.08),transparent 60%);pointer-events:none}
+.rcta h2{font-family:'Instrument Serif',serif;font-size:26px;font-weight:400;color:var(--white);margin-bottom:10px;position:relative}
+.rcta p{color:var(--ink-300);font-size:15px;margin-bottom:24px;position:relative;line-height:1.6}
+.rcta-btn{display:inline-flex;align-items:center;gap:10px;padding:14px 36px;background:var(--teal-500);color:var(--ink);border:none;border-radius:var(--radius-sm);font-size:16px;font-weight:700;font-family:inherit;cursor:pointer;transition:all .25s;position:relative;text-decoration:none}
+.rcta-btn:hover{background:var(--teal-400);transform:translateY(-2px)}
+.results-waste{max-width:480px;margin:28px auto 0;padding:20px 24px;background:rgba(239,68,68,.08);border:1px solid rgba(239,68,68,.2);border-radius:var(--radius-sm);text-align:center;position:relative;z-index:2}
+.results-waste .rw-label{font-size:12px;font-weight:700;text-transform:uppercase;letter-spacing:1.5px;color:var(--ink-400);margin-bottom:6px}
+.results-waste .rw-amount{font-family:'Instrument Serif',serif;font-size:clamp(28px,4vw,36px);color:#EF4444;line-height:1.2}
+.results-waste .rw-basis{font-size:12px;color:var(--ink-400);margin-top:6px;line-height:1.5}
+.results-reassurance{max-width:700px;margin:0 auto;padding:0 24px 8px}
+.rr-box{background:var(--white);border:1px solid var(--ink-100);border-radius:var(--radius);padding:20px 24px;margin-bottom:14px;display:flex;align-items:flex-start;gap:14px}
+.rr-icon{min-width:32px;width:32px;height:32px;background:var(--teal-50);border-radius:8px;display:flex;align-items:center;justify-content:center}
+.rr-icon svg{width:18px;height:18px;color:var(--teal-700)}
+.rr-text{font-size:14px;color:var(--ink-500);line-height:1.6}
+.rr-text strong{color:var(--ink);font-weight:700;display:block;margin-bottom:2px;font-size:14px}
+.spinner{width:20px;height:20px;border:2.5px solid rgba(255,255,255,.3);border-top-color:white;border-radius:50%;animation:spin .6s linear infinite;display:inline-block}
+@keyframes spin{to{transform:rotate(360deg)}}
+@media(max-width:768px){.nav{padding:14px 20px}.nav.scrolled{padding:10px 20px}.hero{padding:80px 20px 60px}.hero-kicker::before,.hero-kicker::after{width:20px}.pain{padding:56px 20px}.pain-grid{grid-template-columns:1fr;gap:12px}.quiz-header{padding:14px 20px}.quiz-body{padding:32px 20px 100px}.quiz-option{padding:16px}.lead-card{padding:32px 24px;margin:20px}.form-row{grid-template-columns:1fr}.results-hero{padding:60px 20px 48px}.results-body{padding:36px 20px 28px}.rcta{padding:32px 24px}.cc{padding:20px}}
+@media(max-width:380px){.hero h1{font-size:32px}.quiz-question{font-size:22px}.lead-card{padding:28px 20px}}
+</style>
 </head>
 <body>
-  <h1>Health Check Quiz</h1>
-  <p>If you can see this, Netlify deploy is working.</p>
 
-  <form id="leadForm">
-    <input name="firstName" placeholder="First name" required />
-    <input name="lastName" placeholder="Last name" />
-    <input name="email" type="email" placeholder="Email" required />
-    <input name="phone" placeholder="Phone" />
-    <input name="company" placeholder="Company" />
-    <button type="submit">Submit</button>
-  </form>
+<nav class="nav" id="nav">
+  <div class="nav-logo">Prism</div>
+  <a href="#" class="nav-cta" onclick="startQuiz();return false">Take the Health Check</a>
+</nav>
 
-  <pre id="out"></pre>
+<section class="hero" id="sec-landing">
+  <div class="hero-atmos"></div>
+  <div class="hero-content">
+    <div class="hero-kicker">Tally Trading Health Check</div>
+    <h1>Your Tally has the data.<br>Are you <em>using</em> it?</h1>
+    <p class="hero-sub">Most UAE trading companies lose AED 620,000+ a year to manual processes they&#8217;ve stopped noticing. This 5-minute check scores your operations across 5 areas and shows you exactly where.</p>
+    <p class="hero-sub-secondary" style="font-size:clamp(14px,1.6vw,16px);color:var(--ink-400);max-width:480px;margin:0 auto 44px;line-height:1.6;animation:slideUp .7s ease .25s both">Most are using a fraction of what Tally can actually do. Find out if that includes you.</p>
+    <button class="hero-btn" onclick="startQuiz()">Start Your Health Check <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><path d="M5 12h14M12 5l7 7-7 7"/></svg></button>
+    <div class="hero-meta"><span>15 questions</span><span class="sep"></span><span>5 minutes</span><span class="sep"></span><span>Free &amp; instant</span></div>
+  </div>
+</section>
 
-  <script>
-    const out = document.getElementById("out");
-    document.getElementById("leadForm").addEventListener("submit", async (e) => {
-      e.preventDefault();
-      out.textContent = "Submitting...";
+<section class="pain">
+  <div class="pain-inner">
+    <h2>Sound familiar?</h2>
+    <p class="pain-sub">These are the patterns we see in trading companies across the UAE, KSA, and the Gulf.</p>
+    <div class="pain-grid">
+      <div class="pain-card"><div class="pain-num">01</div><h3>Orders written on paper, entered hours later</h3><p>Your sales reps write orders by hand. Someone in the office types them into Tally. By then, the stock picture has already changed.</p></div>
+      <div class="pain-card"><div class="pain-num">02</div><h3>Stock levels you can&#8217;t trust until you walk to the shelf</h3><p>Tally says 50 units. The warehouse says 43. Nobody finds out until a customer order can&#8217;t be fulfilled.</p></div>
+      <div class="pain-card"><div class="pain-num">03</div><h3>Transfers tracked on WhatsApp</h3><p>Moving stock between branches means emails, messages, and someone typing the same numbers into Tally twice. One typo costs hours.</p></div>
+      <div class="pain-card"><div class="pain-num">04</div><h3>No dashboard. Just a feeling.</h3><p>When someone asks &#8220;how&#8217;s business?&#8221; you check three reports, call two people, and still aren&#8217;t sure. The data exists &#8212; you just can&#8217;t see it.</p></div>
+      <div class="pain-card"><div class="pain-num">05</div><h3>Tally does more than you think</h3><p>You bought Tally Gold. You use it for invoicing and basic accounting. That&#8217;s like buying a Range Rover and never leaving first gear.</p></div>
+      <div class="pain-card"><div class="pain-num">06</div><h3>Dead stock sitting in your warehouse</h3><p>Capital tied up in items that haven&#8217;t moved in months. No alerts, no reports, no system to tell you where your money is stuck.</p></div>
+    </div>
+  </div>
+</section>
 
-      const fd = new FormData(e.target);
-      const data = Object.fromEntries(fd.entries());
+<section class="social-proof" style="padding:28px 24px;background:var(--ink);text-align:center;border-top:1px solid var(--ink-700)">
+  <p style="font-size:14px;color:var(--ink-300);max-width:640px;margin:0 auto;line-height:1.7">Built from real operations data: a Dubai trading company with 5 warehouses, 16 field sales reps, and 2,000+ SKUs across the UAE, Saudi Arabia, and Bahrain. The same company that discovered AED 620,000 in annual process waste.</p>
+</section>
 
-      // Basic tags for testing
-      data.tags = ["tally-health-check", "prism-lead", "source-netlify"];
+<section class="cta-strip">
+  <h2>Find out exactly where you stand</h2>
+  <p>15 questions. 5 minutes. No sales pitch &#8212; just your score and what it means.</p>
+  <button class="hero-btn" onclick="startQuiz()">Start the Health Check <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><path d="M5 12h14M12 5l7 7-7 7"/></svg></button>
+</section>
 
-      // Capture UTMs (optional)
-      const qs = new URLSearchParams(location.search);
-      data.utm = {
-        utm_source: qs.get("utm_source"),
-        utm_medium: qs.get("utm_medium"),
-        utm_campaign: qs.get("utm_campaign"),
-        gclid: qs.get("gclid"),
-        fbclid: qs.get("fbclid")
-      };
+<section class="quiz" id="sec-quiz">
+  <div class="quiz-header">
+    <div class="quiz-logo">Prism</div>
+    <div class="quiz-progress"><div class="quiz-progress-fill" id="pbar" style="width:0%"></div></div>
+    <div class="quiz-count" id="pcnt">0 / 15</div>
+  </div>
+  <div class="quiz-body" id="qbody"></div>
+  <div class="quiz-nav">
+    <button class="quiz-back" id="qback" onclick="prevQ()" disabled>Back</button>
+    <button class="quiz-next" id="qnext" onclick="nextQ()" disabled>Next <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><path d="M5 12h14M12 5l7 7-7 7"/></svg></button>
+  </div>
+</section>
 
-      const res = await fetch("/.netlify/functions/ghl-intake", {
-        method: "POST",
-        headers: {"Content-Type":"application/json"},
-        body: JSON.stringify(data)
-      });
+<section class="lead" id="sec-lead">
+  <div class="hero-atmos"></div>
+  <div class="lead-card">
+    <h2>Your results are ready</h2>
+    <p class="lead-sub">Enter your details to see your full personalised report with benchmark comparisons and recommendations.</p>
+    <div class="lead-preview">
+      <div class="lead-score-preview" id="lscore">&#8212;%</div>
+      <div class="lead-preview-text"><strong>Your score has been calculated</strong>See how you compare to trading companies across the UAE and Gulf.</div>
+    </div>
+    <div class="form-row">
+      <div class="form-field"><label>First Name *</label><input type="text" id="fn" placeholder="Ahmed" required></div>
+      <div class="form-field"><label>Last Name *</label><input type="text" id="ln" placeholder="Al Rashid" required></div>
+    </div>
+    <div class="form-field"><label>Work Email *</label><input type="email" id="em" placeholder="ahmed@company.ae" required></div>
+    <div class="form-field"><label>Company Name *</label><input type="text" id="co" placeholder="Your Trading Company" required></div>
+    <div class="form-row">
+      <div class="form-field"><label>Mobile / WhatsApp</label><input type="tel" id="ph" placeholder="+971 5X XXX XXXX"></div>
+      <div class="form-field"><label>Number of Employees</label><select id="emp"><option value="">Select...</option><option>1-10</option><option>11-25</option><option>26-50</option><option>51+</option></select></div>
+    </div>
+    <button class="form-submit" id="leadbtn" onclick="submitLead()">See My Full Report</button>
+    <p class="form-privacy">Your data stays private. No spam, no sharing.</p>
+  </div>
+</section>
 
-      const txt = await res.text();
-      out.textContent = `Status: ${res.status}\n\n${txt}`;
-    });
-  </script>
+<section class="results" id="sec-results">
+  <div class="results-hero">
+    <div class="results-score-wrap">
+      <div class="results-gauge">
+        <svg viewBox="0 0 180 180"><circle class="trk" cx="90" cy="90" r="78"/><circle class="fil" id="gfill" cx="90" cy="90" r="78" stroke-dasharray="490" stroke-dashoffset="490"/></svg>
+        <div class="rsn"><div class="big" id="rscore">0%</div><div class="of" id="rraw"></div></div>
+      </div>
+    </div>
+    <div class="results-badge" id="rbadge"></div>
+    <div class="results-title" id="rtitle"></div>
+    <div class="results-desc" id="rdesc"></div>
+    <div class="results-waste" id="rwaste" style="display:none">
+      <div class="rw-label">Estimated Annual Operational Waste</div>
+      <div class="rw-amount" id="rwamount"></div>
+      <div class="rw-basis" id="rwbasis"></div>
+    </div>
+    <div class="results-benchmark">
+      <div class="bbar"><div class="bavg" style="left:45%"></div><div class="byou" id="byou" style="left:0%"></div></div>
+      <div class="blabels"><span>0%</span><span>UAE Avg: 45%</span><span>100%</span></div>
+    </div>
+  </div>
+  <div class="results-body">
+    <div class="results-section-title">Your scores by area</div>
+    <div id="ccards"></div>
+  </div>
+  <div class="results-reassurance" id="rreassure" style="display:none">
+    <div class="rr-box">
+      <div class="rr-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg></div>
+      <div class="rr-text"><strong>Your Tally stays exactly where it is.</strong>Prism extends your existing Tally &#8212; no migration, no server changes, no risk to your current data or setup. Your Tally investment is protected.</div>
+    </div>
+    <div class="rr-box">
+      <div class="rr-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M5 12.55a11 11 0 0 1 14.08 0"/><path d="M1.42 9a16 16 0 0 1 21.16 0"/><path d="M8.53 16.11a6 6 0 0 1 6.95 0"/><line x1="12" y1="20" x2="12.01" y2="20"/></svg></div>
+      <div class="rr-text"><strong>Works fully offline &#8212; up to 7 days.</strong>Your reps don&#8217;t need a data connection in the field. Sync in the morning on WiFi, work all day offline, sync again in the evening.</div>
+    </div>
+  </div>
+  <div class="results-cta">
+    <div class="rcta" id="rctainner">
+      <h2>Want to close the gaps?</h2>
+      <p>Book a 20-minute walkthrough. We&#8217;ll show you exactly how Prism connects to your Tally and fixes the areas where you scored lowest.</p>
+      <a href="https://api.aiforbusiness.com/widget/booking/iVLThdhM7t6V0yfJJ8MP" class="rcta-btn" target="_blank">Book Your Personal Demo <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><path d="M5 12h14M12 5l7 7-7 7"/></svg></a>
+    </div>
+  </div>
+</section>
+
+<script>
+var C=[{id:'order_capture',name:'Order Capture Speed',avg:5.2},{id:'inventory_visibility',name:'Inventory Visibility',avg:4.6},{id:'warehouse_efficiency',name:'Warehouse Efficiency',avg:5.0},{id:'executive_visibility',name:'Executive Visibility',avg:4.8},{id:'tally_utilisation',name:'Tally Utilisation',avg:4.4}];
+
+var Q=[
+{c:0,q:'How do your sales reps capture orders in the field?',ctx:'Think about what happens between the customer saying \u201cyes\u201d and the order appearing in Tally.',o:[{t:'Paper forms or notebooks, typed into Tally later by office staff',s:1},{t:'WhatsApp messages or phone calls to the office',s:3},{t:'Basic spreadsheet or email template sent to the office',s:5},{t:'Digital app or system that feeds directly into Tally',s:10}]},
+{c:0,q:'How long does it typically take from a rep taking an order to it appearing in Tally?',ctx:'Include any re-typing, verification, or approval steps.',o:[{t:'Next day or longer',s:1},{t:'Same day, but several hours',s:3},{t:'Within 1\u20132 hours',s:5},{t:'Under 15 minutes, mostly automated',s:10}]},
+{c:0,q:'How many sales orders does your team process in a typical week?',ctx:'Across all branches and warehouses.',ql:'weeklyOrders',o:[{t:'Under 20',s:1,qv:'under_20'},{t:'20\u201350',s:3,qv:'20_50'},{t:'50\u2013150',s:5,qv:'50_150'},{t:'Over 150',s:10,qv:'150_plus'}]},
+{c:1,q:'How accurate are your stock levels in Tally right now?',ctx:'If you picked 10 random items and counted them in the warehouse, how many would match Tally?',o:[{t:'We regularly find significant mismatches',s:1},{t:'Roughly correct, but we always verify before committing to a customer',s:3},{t:'Mostly accurate with occasional discrepancies',s:5},{t:'Highly accurate \u2014 we trust Tally for day-to-day decisions',s:10}]},
+{c:1,q:'Can you see what stock is on order from suppliers and when it will arrive?',ctx:'Pipeline visibility means knowing what\u2019s coming, not just what you have.',o:[{t:'No \u2014 we track POs in spreadsheets, emails, or not at all',s:1},{t:'We know what\u2019s ordered but not expected arrival dates',s:3},{t:'POs are in Tally but we rarely check pipeline reports',s:5},{t:'Full pipeline visibility in Tally with expected delivery dates',s:10}]},
+{c:1,q:'How do you decide when to reorder a product?',ctx:'Think about your top 20 fastest-moving items.',o:[{t:'When someone notices a shelf is empty or a customer complains',s:1},{t:'Periodic manual review \u2014 someone checks stock levels weekly or monthly',s:3},{t:'Min/max levels set in Tally but not regularly maintained',s:5},{t:'Data-driven reorder points based on sales velocity and lead times',s:10}]},
+{c:2,q:'How do you handle stock transfers between branches or warehouses?',ctx:'For example, moving goods from Dubai to Jeddah or Dammam.',o:[{t:'Informal \u2014 WhatsApp messages, emails, then someone types it into Tally on both ends',s:1},{t:'Formal request but still manually entered in Tally at both locations',s:3},{t:'Transfer entered in Tally at source, but receipt is a separate manual step',s:5},{t:'Automated \u2014 one entry triggers debit and credit across warehouses',s:10}]},
+{c:2,q:'How many warehouses or branch locations does your company operate?',ctx:'Include any location where you hold stock, even small ones.',ql:'warehouseCount',neu:1,o:[{t:'1 warehouse only',s:5,qv:'1'},{t:'2\u20133 locations',s:5,qv:'2_3'},{t:'4\u20136 locations',s:5,qv:'4_6'},{t:'7+ locations',s:5,qv:'7_plus'}]},
+{c:2,q:'Can you tell right now how much dead or slow-moving stock is sitting in your warehouses?',ctx:'Dead stock = items with zero sales in the last 6 months.',o:[{t:'No idea \u2014 we\u2019d have to physically go and look',s:1},{t:'We know generally which products are slow, but not the value',s:3},{t:'We run a report occasionally but don\u2019t act on it systematically',s:5},{t:'Regular automated reports with ageing and value, reviewed monthly',s:10}]},
+{c:3,q:'If the owner asks \u201chow did we do this month?\u201d, how quickly can you answer with actual numbers?',ctx:'Revenue, orders, receivables \u2014 not a general feeling.',o:[{t:'It takes a day or more to pull the numbers together',s:1},{t:'A few hours \u2014 someone runs reports and compiles them',s:3},{t:'Within an hour from Tally reports, but requires manual work',s:5},{t:'Instantly \u2014 there\u2019s a dashboard available in real time',s:10}]},
+{c:3,q:'What\u2019s your role in decisions about business systems and tools?',ctx:'We ask this to tailor your recommendations to what you can actually act on.',ql:'decisionRole',neu:1,o:[{t:'I use the systems but don\u2019t choose them',s:5,qv:'user'},{t:'I influence decisions but someone else approves',s:5,qv:'influencer'},{t:'I make or approve these decisions',s:5,qv:'decision_maker'},{t:'I own the business',s:5,qv:'owner'}]},
+{c:3,q:'Do you have visibility into which products and customers drive the most revenue?',ctx:'Top 10 products, top 10 customers, trending up or down.',o:[{t:'We know instinctively, but have no reports to confirm it',s:1},{t:'Annual review \u2014 someone pulls numbers at year end',s:3},{t:'Quarterly or monthly Tally reports, but not easy to compare trends',s:5},{t:'Regular reporting with trend analysis',s:10}]},
+{c:4,q:'Which Tally features are you actively using today?',ctx:'\u201cActive use\u201d means someone uses it at least weekly.',o:[{t:'Invoicing and basic accounting only',s:1},{t:'Plus inventory management and basic reports',s:3},{t:'Plus purchase orders, stock transfers, and ageing reports',s:5},{t:'Full suite including budgeting, cost centres, job costing, or custom TDL reports',s:10}]},
+{c:4,q:'Does any other system or application connect to your Tally data?',ctx:'For example, a mobile app, dashboard, CRM, or any integration.',o:[{t:'Nothing \u2014 Tally is completely standalone',s:1},{t:'We export data to Excel for analysis',s:3},{t:'One or two integrations, mostly manual or partial',s:5},{t:'Tally is connected to other systems with automated data flow',s:10}]},
+{c:4,q:'What prompted you to evaluate your Tally setup right now?',ctx:'This helps us tailor your recommendations.',ql:'urgencyTrigger',o:[{t:'Just curious \u2014 no specific issue right now',s:1,qv:'curious'},{t:'We know we should improve but it\u2019s not urgent',s:3,qv:'aware_not_urgent'},{t:'We\u2019re losing time and efficiency and want to fix it this year',s:7,qv:'active_pain'},{t:'We\u2019re actively losing orders or customers because of current limitations',s:10,qv:'losing_business'}]}
+];
+
+var cur=0,ans=new Array(Q.length).fill(null);
+var arrow='<svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><path d="M5 12h14M12 5l7 7-7 7"/></svg>';
+
+window.addEventListener('scroll',function(){document.getElementById('nav').classList.toggle('scrolled',window.scrollY>40)});
+
+function startQuiz(){
+  document.getElementById('sec-landing').style.display='none';
+  document.querySelector('.pain').style.display='none';
+  document.querySelector('.cta-strip').style.display='none';
+  document.getElementById('nav').style.display='none';
+  document.getElementById('sec-quiz').classList.add('active');
+  cur=0;renderQ();window.scrollTo(0,0);
+}
+
+function renderQ(){
+  var q=Q[cur],cat=C[q.c],b=document.getElementById('qbody');
+  var h='<div class="quiz-category">'+cat.name+'</div><div class="quiz-question">'+q.q+'</div><div class="quiz-context">'+q.ctx+'</div><div class="quiz-options">';
+  for(var i=0;i<q.o.length;i++){h+='<button class="quiz-option'+(ans[cur]===i?' selected':'')+'" onclick="selOpt('+i+')"><span class="ind"></span><span>'+q.o[i].t+'</span></button>';}
+  b.innerHTML=h+'</div>';
+  var p=((cur+1)/Q.length)*100;
+  document.getElementById('pbar').style.width=p+'%';
+  document.getElementById('pcnt').textContent=(cur+1)+' / '+Q.length;
+  document.getElementById('qback').disabled=cur===0;
+  var nb=document.getElementById('qnext');
+  nb.disabled=ans[cur]===null;
+  nb.innerHTML=(cur===Q.length-1?'See Results ':'Next ')+arrow;
+  window.scrollTo({top:0,behavior:'smooth'});
+}
+
+function selOpt(i){
+  ans[cur]=i;
+  var els=document.querySelectorAll('.quiz-option');
+  for(var j=0;j<els.length;j++){els[j].classList.toggle('selected',j===i);}
+  document.getElementById('qnext').disabled=false;
+}
+
+function nextQ(){if(ans[cur]===null)return;if(cur<Q.length-1){cur++;renderQ();}else{showLead();}}
+function prevQ(){if(cur>0){cur--;renderQ();}}
+
+function calc(){
+  var cs=[0,0,0,0,0],qd={},mx=150;
+  for(var i=0;i<Q.length;i++){if(ans[i]!==null){cs[Q[i].c]+=Q[i].o[ans[i]].s;if(Q[i].ql)qd[Q[i].ql]=Q[i].o[ans[i]].qv;}}
+  var tot=cs.reduce(function(a,b){return a+b},0);
+  return{cs:cs,tot:tot,pct:Math.round((tot/mx)*100),qd:qd};
+}
+
+function grade(pct,qd){
+  var r=qd.decisionRole||'',u=qd.urgencyTrigger||'',o=qd.weeklyOrders||'';
+  var dm=r==='owner'||r==='decision_maker',inf=r==='influencer';
+  var ap=u==='active_pain'||u==='losing_business',aw=u==='aware_not_urgent'||ap;
+  if(pct>=86&&u==='curious')return'D';
+  if(dm&&ap&&o!=='under_20')return'A';
+  if((dm||inf)&&aw)return'B';
+  return'C';
+}
+
+function showLead(){
+  document.getElementById('sec-quiz').classList.remove('active');
+  document.getElementById('sec-lead').classList.add('active');
+  document.getElementById('lscore').textContent=calc().pct+'%';
+  window.scrollTo(0,0);
+}
+
+function submitLead(){
+  var fn=document.getElementById('fn').value.trim(),ln=document.getElementById('ln').value.trim(),em=document.getElementById('em').value.trim(),co=document.getElementById('co').value.trim();
+  if(!fn||!ln||!em||!co){alert('Please fill in all required fields.');return;}
+  var btn=document.getElementById('leadbtn');
+  btn.disabled=true;btn.innerHTML='<span class="spinner"></span> Processing...';
+  var r=calc(),g=grade(r.pct,r.qd);
+  var p={firstName:fn,lastName:ln,email:em,companyName:co,phone:document.getElementById('ph').value.trim(),employees:document.getElementById('emp').value,totalScore:r.tot,totalScorePercent:r.pct,orderCaptureScore:r.cs[0],inventoryVisibilityScore:r.cs[1],warehouseEfficiencyScore:r.cs[2],executiveVisibilityScore:r.cs[3],tallyUtilisationScore:r.cs[4],weeklyOrders:r.qd.weeklyOrders||'',warehouseCount:r.qd.warehouseCount||'',decisionRole:r.qd.decisionRole||'',urgencyTrigger:r.qd.urgencyTrigger||'',estimatedWasteAED:(100-r.pct)*6200,leadGrade:g,source:'tally-health-check-v2',tags:'health-check-lead'};
+  fetch('https://services.leadconnectorhq.com/hooks/uhwOMWuFodfwHvR7KXoa/webhook-trigger/6817d777-0606-456e-8326-193a924a3c76',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify(p),mode:'no-cors'}).catch(function(e){console.error(e)});
+  showResults();
+}
+
+function showResults(){
+  document.getElementById('sec-lead').classList.remove('active');
+  document.getElementById('sec-results').classList.add('active');
+  window.scrollTo(0,0);
+  var r=calc(),pct=r.pct,cs=r.cs,tot=r.tot;
+  var se=document.getElementById('rscore');
+  document.getElementById('rraw').textContent=tot+' out of 150';
+  var cnt=0,iv=setInterval(function(){cnt++;se.textContent=cnt+'%';if(cnt>=pct)clearInterval(iv);},30);
+  var circ=2*Math.PI*78,off=circ-(pct/100)*circ,gf=document.getElementById('gfill');
+  var gc;if(pct<=30)gc='#EF4444';else if(pct<=50)gc='#F59E0B';else if(pct<=70)gc='#14B8A6';else gc='#22C55E';
+  gf.setAttribute('stroke',gc);
+  setTimeout(function(){gf.style.strokeDashoffset=off},100);
+  setTimeout(function(){document.getElementById('byou').style.left=pct+'%'},200);
+  var bg=document.getElementById('rbadge'),ti=document.getElementById('rtitle'),de=document.getElementById('rdesc'),rt;
+  if(pct<=30){rt={l:'Significant Gaps',cl:'#EF4444'};ti.textContent='There are significant gaps in your operations';de.textContent='Your Tally setup has untapped potential. The good news: the areas holding you back are exactly the ones where automation delivers the fastest returns. Most companies at this stage see immediate improvements within weeks of making changes.';}
+  else if(pct<=50){rt={l:'Room to Improve',cl:'#F59E0B'};ti.textContent='You have the basics \u2014 but your competitors are pulling ahead';de.textContent='Some processes are working, but manual steps and visibility gaps are costing you time and money. Companies like yours have cut order processing from 80 minutes to 7 minutes by automating their biggest bottlenecks.';}
+  else if(pct<=70){rt={l:'Solid Foundation',cl:'#14B8A6'};ti.textContent='Solid foundation with room to optimise';de.textContent='Your operations are better than most trading companies in the region. To reach the next level, focus on the 1\u20132 areas where you scored lowest. Targeted improvements here will compound quickly.';}
+  else if(pct<=85){rt={l:'Well Optimised',cl:'#22C55E'};ti.textContent='You\u2019re ahead of the pack';de.textContent='Your operations are well-optimised. You\u2019re in the top tier of trading companies using Tally. The opportunity now is predictive \u2014 using your data for forecasting and proactive decision-making.';}
+  else{rt={l:'Industry Leader',cl:'#22C55E'};ti.textContent='Exceptionally well-run';de.textContent='Most companies we work with score 35\u201350% here. The next frontier for businesses at your level is data-driven \u2014 using your historical Tally data for automated demand forecasting, reorder alerts, and proactive inventory optimisation.';}
+  bg.textContent=rt.l;bg.style.color=rt.cl;bg.style.borderBottomColor=rt.cl;
+  var wasteAmt=(100-pct)*6200;
+  if(pct<100){var wEl=document.getElementById('rwaste');wEl.style.display='';document.getElementById('rwamount').textContent='AED '+wasteAmt.toLocaleString();document.getElementById('rwbasis').textContent='Based on '+pct+'% operational efficiency. Each percentage point below 100% \u2248 AED 6,200 in estimated annual waste.';}
+  if(pct<=70){document.getElementById('rreassure').style.display='';}
+
+  if(pct>85){var ci=document.getElementById('rctainner');ci.querySelector('h2').textContent='Ready for the next frontier?';ci.querySelector('p').textContent='Your operations are strong. The next step is data-driven \u2014 automated forecasting, reorder alerts, and proactive inventory optimisation built on top of your existing Tally data.';}
+
+  var ce=document.getElementById('ccards');ce.innerHTML='';var cm=30;
+  var ci=[
+    {l:'Your order capture is entirely manual. This is the single biggest efficiency gain available to you \u2014 digitising this one process typically saves 2\u20133 hours per day.',m:'You have some digital elements but orders still require manual re-entry. Closing this gap would eliminate the most common source of errors and delays.',h:'Your order capture is well-digitised. Look at edge cases \u2014 are all reps using it? Are offline orders handled smoothly?'},
+    {l:'Stock visibility is a blind spot. You\u2019re making buying and selling decisions without reliable data. Start by ensuring Tally stock levels are accurate and checked daily.',m:'You have partial visibility but gaps in pipeline tracking and reorder logic. Adding supplier PO tracking in Tally would give you the \u201cwhat\u2019s coming\u201d picture you\u2019re missing.',h:'Strong inventory visibility. The next step is predictive \u2014 using sales velocity to forecast demand rather than reacting to stockouts.'},
+    {l:'Warehouse operations are heavily manual. Double-entry on transfers and handwritten dispatch notes are costing time and creating errors. Automating transfers is typically a quick win.',m:'Some structure in place but transfers and dispatch still involve manual steps. Focus on the handoff points \u2014 where documents pass between people is where errors creep in.',h:'Efficient warehouse operations. Consider whether you have visibility into dead stock value and days-cover metrics for proactive inventory management.'},
+    {l:'Management is flying blind. If it takes a day to answer \u201chow are we doing?\u201d, decisions are being made on instinct rather than data. A simple daily dashboard would transform this.',m:'Reports exist but require manual effort to produce. The gap is between data existing in Tally and it being visible to decision-makers without asking for it.',h:'Good executive visibility. The next frontier is proactive alerts \u2014 the system telling you about problems before you have to ask.'},
+    {l:'Tally is being significantly underused. You\u2019re paying for a powerful ERP and using it as an invoicing tool. Even enabling features you already own would deliver immediate value.',m:'You\u2019re using Tally reasonably well but key features like pipeline tracking, custom reports, and integrations remain untapped. A Tally health check with your consultant could unlock quick wins.',h:'Excellent Tally utilisation. You\u2019re in a strong position to layer on data-driven analytics and connected applications that extend Tally further.'}
+  ];
+  for(var i=0;i<C.length;i++){
+    var sc=cs[i],sp=(sc/cm)*100,as=C[i].avg*3,ap=(as/cm)*100;
+    var ins;if(sc<=9)ins=ci[i].l;else if(sc<=18)ins=ci[i].m;else ins=ci[i].h;
+    var bc;if(sc<=9)bc='#EF4444';else if(sc<=18)bc='#D97706';else bc='#22C55E';
+    var brc;if(sc<=9)brc='#EF4444';else if(sc<=18)brc='#F59E0B';else brc='#22C55E';
+    var df=sc-as,bt;
+    if(df>3)bt='Above average for UAE trading companies (+'+Math.round(df)+' points)';
+    else if(df<-3)bt='Below average for UAE trading companies ('+Math.round(df)+' points)';
+    else bt='Near the average for UAE trading companies';
+    ce.innerHTML+='<div class="cc"><div class="cc-h"><span class="cc-n">'+C[i].name+'</span><span class="cc-s" style="color:'+bc+'">'+sc+' / '+cm+'</span></div><div class="cc-bw"><div class="cc-bf" style="width:'+sp+'%;background:'+brc+'"></div><div class="cc-ba" style="left:'+ap+'%"></div></div><div class="cc-i">'+ins+'</div><div class="cc-bm">'+bt+'</div></div>';
+  }
+}
+</script>
 </body>
 </html>
